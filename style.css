@@ -10,7 +10,13 @@ html,body{
 }
 
 :root{
+
+    /* Background color */
     --bg-primary-color:#0c0c0c;
+    --bg-fill-color:#fdfdfc;
+    --bg-food-color:#ff3b3b;
+
+    /* Text color */
     --text-primary-color:#f0f0f0;
 
 
@@ -44,15 +50,28 @@ html{
 
 main,section{
     width:100%;
-    height:100%;
+    height:100%;   /*These containers fill full available space*/
 }
 
+.btn{
+    
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer ;
+    transition: all 0.3s ease;
+}
+
+.btn:hover{
+ transform: scale(1.1);
+}
 section{
     padding: var(--space-2xl);
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: blue;
+   
+    gap:var(--space-lg);
 }
 
 section .infos{
@@ -65,11 +84,67 @@ section .infos{
     padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--border-primary-color);
     border-radius: var(--border-radius-sm);
+   
 }
+
+   .info h3{
+        white-space: nowrap;
+    }
 
 .board{
     border:1px solid var(--border-primary-color);
-    flex-grow: 1;
+   flex-grow: 1; /* flex-grow=0 takes only space content requires but flex-grow=1 required all the remaining space   */
+display: grid; 
+grid-template-columns: repeat(auto-fill,minmax(50px,1fr));
+grid-template-rows: repeat(auto-fill,minmax(50px,1fr));
+
+}
+
+.block{
+    border: 1px solid var(--border-primary-color);
+    border-radius: 50%;
+}
+
+.fill{
+    background-color: var(--bg-fill-color);
+}
+
+.food{
+    background-color:var(--bg-food-color);
+}
+
+.modal{
+    height: 100vh;
+    width: 100vw;
+
+    position: fixed;
+    top: 0;
+    background-color: #35353587;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal .start-game  ,
+.modal .game-over{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
 }
 
 
+.modal .game-over{
+    display: none;
+}
+
+@media (max-width:600px) {
+    .info h3{
+     size: 10px
+    }
+
+    .info{
+        padding: var(--space-xs);
+    }
+}
